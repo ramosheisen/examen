@@ -10,5 +10,8 @@ defmodule Examen.Repo.Migrations.CreateLibros do
       timestamps()
     end
 
+    create(index(:autores, [:id]))
+    create(index(:biblioteca, [:id]))
+
   end
 end
