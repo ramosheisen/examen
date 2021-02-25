@@ -5,12 +5,9 @@ defmodule Examen.HelperLibros.Libros do
   alias Examen.HelperAutores.Autores
 
   schema "libros" do
-    field :autor, :string
-    field :biblioteca, :integer
     field :titulo, :string
-
-    belongs_to :biblioteca_id, Biblioteca
-    belongs_to :autores, Autores
+    belongs_to :biblioteca, Biblioteca
+    belongs_to :autor, Autores
 
     timestamps()
   end
@@ -19,6 +16,8 @@ defmodule Examen.HelperLibros.Libros do
   def changeset(libros, attrs) do
     libros
     |> cast(attrs, [:titulo, :autor, :biblioteca])
+    |> assoc_constraint(:autor)
+    |> assoc_constraint(:biblioteca)
     |> validate_required([:titulo, :autor, :biblioteca])
   end
 end

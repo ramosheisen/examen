@@ -20,8 +20,8 @@ defmodule Examen.Factory do
 
   def libros_factory do
     %Libros{
-      autor: 1,
-      biblioteca: 1,
+      autor: build(:autores),
+      biblioteca: build(:biblioteca),
       titulo: "Cien años de soledad",
     }
   end

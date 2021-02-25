@@ -24,6 +24,7 @@ defmodule Examen.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Examen.DataCase
+      import Examen.Factory
     end
   end
 

@@ -1,9 +1,11 @@
 defmodule Examen.HelperAutores.Autores do
   use Ecto.Schema
   import Ecto.Changeset
+  #alias  Examen.HelperLibros.Libros
 
   schema "autores" do
     field :autor, :string
+    #has_many :autor, Libros
 
     timestamps()
   end

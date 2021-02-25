@@ -1,9 +1,10 @@
 defmodule BibliotecaTest do
   use ExUnit.Case
+  use Examen.DataCase
   alias Examen.HelperBiblioteca
   alias Examen.HelperBiblioteca.Biblioteca
 
-  describe "biblioteca" do
+  describe "biblioteca/block 1" do
 
     @argumentos_validos_create %{ nombre: "Biblioteca principal", ubicacion: "Guacari, Valle del cauca" }
     @argumentos_invalidos %{ nombre: nil, ubicacion: nil }
@@ -45,6 +46,41 @@ defmodule BibliotecaTest do
 
     test "delete_biblioteca/4 Elimina las bibliotecas" do
       biblioteca = biblioteca()
+      assert {:ok, %Biblioteca{}} = HelperBiblioteca.delete_biblioteca(biblioteca)
+      assert_raise Ecto.NoResultsError, fn -> HelperBiblioteca.get_biblioteca!(biblioteca.id) end
+    end
+
+  end
+
+  describe "biblioteca/block 2" do
+
+    setup do
+      biblioteca = insert(:biblioteca)
+      { :ok, biblioteca: biblioteca }
+    end
+
+    test "list_biblioteca/2 Devulve todas las bibliotecas", %{ biblioteca: biblioteca } do
+      assert HelperBiblioteca.list_biblioteca() == [biblioteca]
+    end
+
+    test "list_biblioteca/2 Devulve una biblioteca con id", %{ biblioteca: biblioteca } do
+      assert HelperBiblioteca.get_biblioteca!(biblioteca.id) == biblioteca
+    end
+
+    test "update_biblioteca/3 Actualiza las bibliotecas", %{ biblioteca: biblioteca } do
+      assert {:ok, %Biblioteca{} = biblioteca} = HelperBiblioteca.update_biblioteca(
+        biblioteca, %{ nombre: "Jose Celestino Mutis", ubicacion: "Cali, Valle del cauca" })
+      assert biblioteca.nombre == "Jose Celestino Mutis"
+      assert biblioteca.ubicacion == "Cali, Valle del cauca"
+    end
+
+    test "update_biblioteca/3 Actualiza las bibliotecas con id", %{ biblioteca: biblioteca } do
+      assert {:ok, %Biblioteca{} = biblioteca} = HelperBiblioteca.update_biblioteca(
+        biblioteca, %{ nombre: "Jose Mutis", ubicacion: "Cali" })
+      assert biblioteca == HelperBiblioteca.get_biblioteca!(biblioteca.id)
+    end
+
+    test "delete_biblioteca/4 Elimina las bibliotecas con id", %{ biblioteca: biblioteca } do
       assert {:ok, %Biblioteca{}} = HelperBiblioteca.delete_biblioteca(biblioteca)
       assert_raise Ecto.NoResultsError, fn -> HelperBiblioteca.get_biblioteca!(biblioteca.id) end
     end
