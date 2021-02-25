@@ -1,0 +1,26 @@
+<h1>Listing Autores</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Autor</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for autores <- @autores do %>
+    <tr>
+      <td><%= autores.autor %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.autores_path(@conn, :show, autores) %></span>
+        <span><%= link "Edit", to: Routes.autores_path(@conn, :edit, autores) %></span>
+        <span><%= link "Delete", to: Routes.autores_path(@conn, :delete, autores), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Autores", to: Routes.autores_path(@conn, :new) %></span>

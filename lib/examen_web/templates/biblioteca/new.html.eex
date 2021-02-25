@@ -1,0 +1,5 @@
+<h1>New Biblioteca</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.biblioteca_path(@conn, :create)) %>
+
+<span><%= link "Back", to: Routes.biblioteca_path(@conn, :index) %></span>

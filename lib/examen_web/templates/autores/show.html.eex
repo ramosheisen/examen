@@ -1,0 +1,13 @@
+<h1>Show Autores</h1>
+
+<ul>
+
+  <li>
+    <strong>Autor:</strong>
+    <%= @autores.autor %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.autores_path(@conn, :edit, @autores) %></span>
+<span><%= link "Back", to: Routes.autores_path(@conn, :index) %></span>

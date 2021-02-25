@@ -1,0 +1,18 @@
+<h1>Show Biblioteca</h1>
+
+<ul>
+
+  <li>
+    <strong>Nombre:</strong>
+    <%= @biblioteca.nombre %>
+  </li>
+
+  <li>
+    <strong>Ubicacion:</strong>
+    <%= @biblioteca.ubicacion %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.biblioteca_path(@conn, :edit, @biblioteca) %></span>
+<span><%= link "Back", to: Routes.biblioteca_path(@conn, :index) %></span>

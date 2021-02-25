@@ -1,0 +1,30 @@
+<h1>Listing Libros</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Titulo</th>
+      <th>Autor</th>
+      <th>Biblioteca</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for libros <- @libros do %>
+    <tr>
+      <td><%= libros.titulo %></td>
+      <td><%= libros.autor %></td>
+      <td><%= libros.biblioteca %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.libros_path(@conn, :show, libros) %></span>
+        <span><%= link "Edit", to: Routes.libros_path(@conn, :edit, libros) %></span>
+        <span><%= link "Delete", to: Routes.libros_path(@conn, :delete, libros), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Libros", to: Routes.libros_path(@conn, :new) %></span>
