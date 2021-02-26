@@ -7,8 +7,6 @@ defmodule Examen.HelperLibros do
   alias Examen.Repo
 
   alias Examen.HelperLibros.Libros
-  alias Examen.HelperBiblioteca.Biblioteca
-  alias Examen.HelperAutores.Autores
 
   @doc """
   Returns the list of libros.
@@ -23,15 +21,25 @@ defmodule Examen.HelperLibros do
     Repo.all(Libros)
   end
 
-  def list_libros_by_join() do
+  def list_libros_by_join(id) do
     from(l in Libros,
-      join: b in Biblioteca,
-      join: a in Autores,
-      on: b.id == l.id,
-      on: a.id == l.id,
-      select: { b.nombre, b.ubicacion, a.autor, l.titulo })
+      join: b in assoc(l, :biblioteca),
+      join: a in assoc(l, :autor),
+      where: l.id == ^id,
+      select: l)
     |> Repo.all
   end
+
+  # def list_libros_by_join(id) do
+  #   from(l in Libros,
+  #     join: b in Biblioteca,
+  #     join: a in Autores,
+  #     on: b.id == l.id,
+  #     on: a.id == l.id,
+  #     where: l.id == ^id,
+  #     select: { b.nombre, b.ubicacion, a.autor, l.titulo })
+  #   |> Repo.all
+  # end
 
   @doc """
   Gets a single libros.

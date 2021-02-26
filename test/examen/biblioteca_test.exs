@@ -90,4 +90,19 @@ defmodule BibliotecaTest do
     end
   end
 
+  describe "biblioteca/block 3" do
+
+    test "create_biblioteca/1 Crea una biblioteca devolviendo error" do
+      assert {:error, %Ecto.Changeset{}} = HelperBiblioteca.create_biblioteca(%{ nombre: nil, ubicacion: nil })
+    end
+
+    test "update_biblioteca/2 Actualiza una biblioteca devolviendo error" do
+      assert {:error, %Ecto.Changeset{ errors: errors } = biblioteca} = HelperBiblioteca.update_biblioteca(
+        %Biblioteca{}, %{ nombre: nil, ubicacion: nil })
+      assert length(errors) > 0
+      #assert_raise Ecto.NoResultsError, fn -> length(errors) > 0 end
+    end
+
+  end
+
 end

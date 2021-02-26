@@ -14,19 +14,18 @@ defmodule LibrosTest do
     end
 
     test "list_libros/2 Devulve todos los libros", %{ libros: libros } do
-      [ %Examen.HelperLibros.Libros{} = libros ] = HelperLibros.list_libros()
+      [ %Libros{} = libros ] = HelperLibros.list_libros()
       assert HelperLibros.list_libros() == [libros]
     end
 
     test "list_libros/2 Devulve un libro con id", %{ libros: libros } do
-      [ %Examen.HelperLibros.Libros{} = libros ] = HelperLibros.list_libros()
+      [ %Libros{} = libros ] = HelperLibros.list_libros()
       assert HelperLibros.get_libros!(libros.id) == libros
     end
 
-    test "list_libros/2 Devulve libros con inner" do
-      HelperLibros.list_libros_by_join() |> IO.inspect(label: "---------------->")
-      #[ %Libros{} = libros ] = HelperLibros.list_libros_by_join()
-      #assert libros == []
+    test "list_libros/2 Devulve libros con join", %{ libros: libros } do
+      [ %Libros{} = libros ] = HelperLibros.list_libros_by_join(libros.id)
+      assert HelperLibros.list_libros_by_join(libros.id) == [libros]
     end
 
   end
