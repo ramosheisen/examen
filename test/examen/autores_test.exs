@@ -82,6 +82,10 @@ defmodule AutoresTest do
       assert_raise Ecto.NoResultsError, fn -> HelperAutores.get_autores!(autores.id) end
     end
 
+    test "change_autores/5 ", %{ autores: autores } do
+      assert %Ecto.Changeset{} = HelperAutores.change_autores(autores)
+    end
+
   end
 
 end

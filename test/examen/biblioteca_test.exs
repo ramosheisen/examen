@@ -85,6 +85,9 @@ defmodule BibliotecaTest do
       assert_raise Ecto.NoResultsError, fn -> HelperBiblioteca.get_biblioteca!(biblioteca.id) end
     end
 
+    test "change_biblioteca/5 ", %{ biblioteca: biblioteca } do
+      assert %Ecto.Changeset{} = HelperBiblioteca.change_biblioteca(biblioteca)
+    end
   end
 
 end
